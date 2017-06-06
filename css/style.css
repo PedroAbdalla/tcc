@@ -1,0 +1,103 @@
+﻿body {
+  font-family: Open Sans; 
+}
+/*-------------------topo.php-------------------*/
+.topo{
+    background: #1CCACD;
+    height: 60px;
+}
+.topo .logo{
+    font-size: 16px;
+    font-style: italic;
+    color: white;
+    margin: 0 auto;
+    background: #1CCACD;
+    width: 98%;
+    max-width: 1100px;
+    line-height: 60px;
+}
+.navbar .container-fluid{
+    padding: 0px;
+    margin: 0 auto;
+    width: 98%;
+    max-width: 1100px;
+}
+.navbar .navbar-nav{
+    margin-left: -29px;
+}
+.nav .open > a{
+    color: #1CCACD;
+}
+.navbar-toggle{
+    border: 1px solid #1CCACD;
+}
+.navbar-toggle .icon-bar{
+    background: #1CCACD;
+}
+/*-------------------index.php-------------------*/
+.conteudo{
+    width: 98%;
+    max-width: 1100px;
+    margin: 0px auto;
+}
+.categorias-home {
+    width: 98%;
+    max-width: 1100px;
+    margin: 0px auto;
+    text-align: center;
+}
+#demos {
+    margin: 0px 83px;
+}
+#demos .owl-carousel{
+    margin: 0px;
+}
+.item.item-categoria {
+    background: #4DC7A0;
+    height: 80px !important;
+    text-align: center;
+}
+.item.item-categoria > h4{
+    line-height: 80px;
+    margin: 0px !important;
+    text-transform: capitalize;
+    color: white;
+}
+.owl-nav > div{
+   position: absolute;
+    top: 22px;
+}
+.owl-nav > .owl-prev {
+    left: -73px;
+}
+.owl-nav > .owl-next {
+    right: -73px;
+}
+.prancha{
+    margin: 5px auto;
+    border: 1px solid #DDD;
+    text-align: center;
+    padding: 15px 0px;
+    box-shadow: 0px 1px 4px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+.prancha div{
+    display: inline-block;
+    width: 19%;
+    padding: 5px 3px;
+}
+.prancha .prancha-ajax {
+    width: 100%;
+    padding: 5px 3px;
+}
+.prancha-ajax > div {
+    display: inline-block;
+    width: 19%;
+}
+.prancha img{
+    width: 100%;
+    height: 115px;
+    padding: 3px;
+    cursor: pointer;
+}
