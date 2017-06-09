@@ -48,11 +48,14 @@ include_once('footer.html');
         })
         .always(function() {
             console.log('ok');
-            jQuery('.figura').on('click', function(event) {
+
+          
+            jQuery('.figura').on('click', function () {
+                window.speechSynthesis.cancel();
                 var msg = new SpeechSynthesisUtterance(jQuery(this).attr('data-text'));
                 window.speechSynthesis.speak(msg);
-                console.log(msg);
             });
+
         });
     };
 
@@ -77,13 +80,14 @@ include_once('footer.html');
             }
         }
     });
-owl.on('mousewheel', '.owl-stage', function (e) {
-    if (e.deltaY>0) {
-        owl.trigger('next.owl');
-    } else {
-        owl.trigger('prev.owl');
-    }
-    e.preventDefault();
-});
+
+    owl.on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY>0) {
+            owl.trigger('next.owl');
+        } else {
+            owl.trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
 
 </script>
