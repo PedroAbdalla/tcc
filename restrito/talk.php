@@ -1,23 +1,9 @@
 ﻿<?php
 include_once('topo.php');
 ?>
- <style type="text/css">
-        .quadro{
-            border: 1px solid #eee;
-            width: 98%;
-            max-width: 600px;
-            margin: 10px auto;
-        }
-        .quadro > div{
-            padding: 15px;
-        }
-        .quadro-txt{
-            height: 250px;
-            border: 1px solid #eee;
-        }
-    </style>
 
-    <script type="text/javascript">
+
+<script type="text/javascript">
      function repeatMsg(msg) {
         var fala = new SpeechSynthesisUtterance(msg);
         window.speechSynthesis.speak(fala);

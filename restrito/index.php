@@ -47,9 +47,7 @@ include_once('footer.html');
             console.log("error");
         })
         .always(function() {
-            console.log('ok');
-
-          
+            console.log('ok');          
             jQuery('.figura').on('click', function () {
                 window.speechSynthesis.cancel();
                 var msg = new SpeechSynthesisUtterance(jQuery(this).attr('data-text'));
@@ -67,10 +65,10 @@ include_once('footer.html');
         margin:10,
         responsive:{
             0:{
-                items:3
+                items:2
             },
             600:{
-                items:4
+                items:3
             },
             960:{
                 items:5
