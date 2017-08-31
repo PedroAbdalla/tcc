@@ -30,31 +30,35 @@
 
     </head>
     <body>
-    <script type="text/javascript">
-        if(window.speechSynthesis == undefined){
-            jQuery.ajax({
-                url: '../ajax/ajaxCompativel.html',
-                type: 'POST',
-                dataType: 'html',
-            })
-            .done(function(retorno) {
-                console.log("success");
-                jQuery('body').before(retorno);
-                jQuery('.collapse').collapse();
-            })
-            .fail(function() {
-                console.log("error");
-            })
-            .always(function() {
-                console.log("complete");
-            });
-            
-        }
-    </script>
+        <script type="text/javascript">
+            if(window.speechSynthesis == undefined){
+                jQuery.ajax({
+                    url: '../ajax/ajaxCompativel.html',
+                    type: 'POST',
+                    dataType: 'html',
+                })
+                .done(function(retorno) {
+                    console.log("success");
+                    jQuery('body').before(retorno);
+                    jQuery('.collapse').collapse();
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+
+            }
+        </script>
+ 
+        <?php
+            include_once('login.php');
+        ?>
         <div class="topo">
             <div>
                 <div class="logo">Dynamic Display</div>
-                <div class="login">
+                <div class="login" data-toggle="modal" data-target=".bs-example-modal-lg">
                     <span class="glyphicon glyphicon-user"></span> Olá Visitante
                 </div>
             </div>
