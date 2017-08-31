@@ -5,16 +5,24 @@
 .topo{
     background: #1CCACD;
     height: 60px;
+    width: 100%;
 }
-.topo .logo{
+.topo > div{
+    width: 98%;
+    max-width: 1100px;
+    margin: 0px auto;
+}
+.topo > div > div{
     font-size: 16px;
     font-style: italic;
     color: white;
-    margin: 0 auto;
-    background: #1CCACD;
-    width: 98%;
-    max-width: 1100px;
     line-height: 60px;
+}
+.topo > div > .logo{
+   float: left;
+}
+.topo > div > .login{
+   float: right;
 }
 .navbar .container-fluid{
     padding: 0px;
@@ -121,4 +129,22 @@
     height: 250px;
     border: 1px solid #DDD;
     /*box-shadow: 0px 1px 4px 4px rgba(0, 0, 0, 0.1);*/
+}
+/*-------------------ajaxCompativel.html-------------------*/
+.well > .row{
+    margin: 15px 15px 0;
+}
+h4, .logos{
+    text-align: center;
+    margin-top: 0px;
+}
+.btn.btn-primary {
+    padding: 2.5px 5px 1px;
+    cursor: pointer;
+    font-size: 8pt;
+    margin-top: -20px;
+}
+.logos a{
+    display: inline-block;
+    margin: 10px 20px;
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <title>tcc</title>
@@ -18,8 +18,6 @@
         <!--Owl CSS -->
         <link rel="stylesheet" href="../lib/owlcarousel/dist/assets/owl.carousel.min.css">
         <link rel="stylesheet" href="../lib/owlcarousel/dist/assets/owl.theme.default.min.css">
-        <!-- link com conflito no bootstrap  -->
-        <!-- <link rel="stylesheet" href="../lib/owlcarousel/docs/assets/css/docs.theme.min.css"> -->
         
         <!--site CSS -->
         <link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -32,8 +30,34 @@
 
     </head>
     <body>
+    <script type="text/javascript">
+        if(window.speechSynthesis == undefined){
+            jQuery.ajax({
+                url: '../ajax/ajaxCompativel.html',
+                type: 'POST',
+                dataType: 'html',
+            })
+            .done(function(retorno) {
+                console.log("success");
+                jQuery('body').before(retorno);
+                jQuery('.collapse').collapse();
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
+        }
+    </script>
         <div class="topo">
-            <div class="logo">Dynamic Display</div>
+            <div>
+                <div class="logo">Dynamic Display</div>
+                <div class="login">
+                    <span class="glyphicon glyphicon-user"></span>Olá Visitante
+                </div>
+            </div>
         </div>
         <nav class="navbar">
             <div class="container-fluid">

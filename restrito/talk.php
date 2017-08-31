@@ -2,9 +2,10 @@
 include_once('topo.php');
 ?>
 
-
 <script type="text/javascript">
-     function repeatMsg(msg) {
+    if(window.speechSynthesis) alert('=)'); else alert('=(');
+
+    function repeatMsg(msg) {
         var fala = new SpeechSynthesisUtterance(msg);
         window.speechSynthesis.speak(fala);
     }
