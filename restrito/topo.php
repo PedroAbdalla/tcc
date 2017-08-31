@@ -55,7 +55,7 @@
             <div>
                 <div class="logo">Dynamic Display</div>
                 <div class="login">
-                    <span class="glyphicon glyphicon-user"></span>Olá Visitante
+                    <span class="glyphicon glyphicon-user"></span> Olá Visitante
                 </div>
             </div>
         </div>
