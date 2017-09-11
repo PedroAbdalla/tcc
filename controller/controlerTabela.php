@@ -1,15 +1,19 @@
-<?php
-require_once('../classes/modeloTabela.inc');
-require_once('../dao/tabelaDao.inc');
-    $tabelaDao = new tabelaDao();
-    $lista = $tabelaDao->getTabela();
-    session_start();
-    $_SESSION['tabela'] = $lista;
+﻿<?php
+    require_once('../classes/modeloTabela.inc');
+    require_once('../dao/tabelaDao.inc');
+    $opcao = (int)$_REQUEST['opcao'];
+    if($opcao == 1){
+        abrirIndex();
+    }
+    function abrirIndex(){        
+        $tabelaDao = new tabelaDao();
+        $lista = $tabelaDao->getTabela();
+        $categoria = $tabelaDao->getCategoria();
 
-    $tabelaDao = new tabelaDao();
-    $categoria = $tabelaDao->getCategoria();
-    $_SESSION['categoria'] = $categoria;
+        session_start();
+        $_SESSION['tabela'] = $lista;
+        $_SESSION['categoria'] = $categoria;
 
-    header("Location:../restrito/index.php");
-
+        header("Location:../restrito/index.php");
+    }
 ?>

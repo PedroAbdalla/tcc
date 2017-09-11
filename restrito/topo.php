@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>tcc</title>
+        <meta charset="UTF-8">
         <!-- jQuery -->
         <script src="../lib/jquery/jquery-3.2.1.min.js"></script>
+        
+        <script src="../lib/js/scripts.js"></script>
 
         <!-- Bootstrap JavaScript -->
         <script src="../lib/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -31,27 +34,8 @@
     </head>
     <body>
         <script type="text/javascript">
-            if(window.speechSynthesis == undefined){
-                jQuery.ajax({
-                    url: '../ajax/ajaxCompativel.html',
-                    type: 'POST',
-                    dataType: 'html',
-                })
-                .done(function(retorno) {
-                    console.log("success");
-                    jQuery('body').before(retorno);
-                    jQuery('.collapse').collapse();
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-
-            }
-        </script>
- 
+            verificaCompatibilidade();
+        </script> 
         <?php
             include_once('login.php');
         ?>
@@ -87,7 +71,7 @@
                             </ul>
                         </li>
                     </ul>      
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
         <div class="conteudo">
