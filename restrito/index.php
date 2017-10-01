@@ -1,7 +1,5 @@
 ﻿<?php
-    session_start();
-    $tabela = $_SESSION['tabela'];
-    $categoria = $_SESSION['categoria'];
+   
     if(empty($categoria)){
         header("Location:../controller/controlerTabela.php?opcao=1");
     }

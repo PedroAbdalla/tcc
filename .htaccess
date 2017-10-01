@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^index/?$ /tcc/controller/controlerTabela.php?opcao=1 [NC,L]
+RewriteRule ^talk/?$ /tcc/restrito/talk.php [NC,L]
+RewriteRule ^deslogar/?$ /tcc/controller/controlerTabela.php?opcao=2 [NC,L]
