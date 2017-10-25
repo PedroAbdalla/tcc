@@ -1,14 +1,22 @@
 <?php
-class usuario {
+class Usuario {
     private $id;
     private $login;
     private $senha;
-    private $usuario;
-    function __construct($id, $login, $senha, $usuario) {
+    private $nome;
+    private $permicao;
+    function setUsuario($id, $login, $senha, $nome, $permicao) {
         $this->id = $id;
         $this->login = $login;
         $this->senha = $senha;
-        $this->usuario = $usuario;
+        $this->nome = $nome;
+        $this->permicao = $permicao;
+    }
+    function Usuario($login, $senha, $nome, $permicao) {
+        $this->login = $login;
+        $this->senha = $senha;
+        $this->nome = $nome;
+        $this->permicao = $permicao;
     }
     function getId() {
         return $this->id;
@@ -22,8 +30,12 @@ class usuario {
         return $this->senha;
     }
 
-    function getUsuario() {
-        return $this->usuario;
+    function getNome() {
+        return $this->nome;
+    }
+
+    function getPermicao() {
+        return $this->permicao;
     }
 
     function setId($id) {
@@ -38,7 +50,11 @@ class usuario {
         $this->senha = $senha;
     }
 
-    function setUsuario($usuario) {
-        $this->usuario = $usuario;
+    function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    function setPermicao($permicao) {
+        $this->permicao = $permicao;
     }
 }

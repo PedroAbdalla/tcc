@@ -1,4 +1,4 @@
-﻿
+
 <?php
     require_once('../classes/usuario.php');
     require_once('../dao/usuarioDao.inc');

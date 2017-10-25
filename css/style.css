@@ -1,6 +1,17 @@
 ﻿body {
   font-family: Open Sans; 
 }
+.btn-default{
+    background: #4DC7A0;
+    color: white;
+    border-color: #45ad8b;
+}
+.btn-default:hover {
+    background: #33886d;
+    color: white;
+    border-color: #33886d;
+    box-shadow: -1px 2px 8px 1px rgba(51, 136, 109, 0.41);
+}
 /*-------------------topo.php-------------------*/
 .topo{
     background: #1CCACD;
@@ -23,6 +34,7 @@
 }
 .topo > div > .login{
    float: right;
+   text-align: right;
 }
 .topo > div > .login:hover{
     cursor: pointer;

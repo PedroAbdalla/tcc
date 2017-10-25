@@ -1,4 +1,4 @@
-﻿<?php
+<?php
     require_once('conexao.inc');
     require_once('../classes/modeloTabela.inc');
 
@@ -18,6 +18,17 @@ class usuarioDao{
         $sql->bindValue(':usuario',$usuario);
         $sql->execute();
         return $sql->fetch(PDO::FETCH_OBJ);
+    }
+    public function incluirUsuario(Usuario $usuario)
+    {
+     
+        $sql = $this->conn->prepare("INSERT INTO usuario(login, senha, nome, permicao) VALUES (:a, :b, :c, :d)");
+        $sql->bindValue(':a',$usuario->getLogin());
+        $sql->bindValue(':b',$usuario->getSenha());
+        $sql->bindValue(':c',$usuario->getNome());
+        $sql->bindValue(':d',$usuario->getPermicao());
+        $sql->execute();
+
     }
 }
 ?>
