@@ -24,13 +24,6 @@
             $caminho = '../view/publico/erro.php';
         }
     }
-    if($opcao == 5){
-        if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
-            $caminho = '../view/restrito/novo_usuario.php';
-        } else {
-            $caminho = '../view/publico/erro.php';
-        }
-    }
     if($opcao == 6){
         $caminho = '../view/publico/erro.php';
     }

@@ -30,5 +30,15 @@ class usuarioDao{
         $sql->execute();
 
     }
+    public function listarUsuarios()
+    {
+        $rs = $this->conn->query("SELECT * FROM usuario");
+        $lista = array();
+        while($usuario = $rs->fetch(PDO::FETCH_OBJ))
+        {
+            $lista[] = $usuario;
+        }
+        return $lista;
+    }
 }
 ?>

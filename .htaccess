@@ -4,5 +4,9 @@ RewriteRule ^index/?$ /tcc/controller/controlerTabela.php?opcao=1 [NC,L]
 RewriteRule ^deslogar/?$ /tcc/controller/controlerTabela.php?opcao=2 [NC,L]
 RewriteRule ^talk/?$ /tcc/controller/controlerTabela.php?opcao=3 [NC,L]
 RewriteRule ^admin/?$ /tcc/controller/controlerTabela.php?opcao=4 [NC,L]
-RewriteRule ^novo_usuario/?$ /tcc/controller/controlerTabela.php?opcao=5 [NC,L]
+
 RewriteRule ^enviar_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=1 [NC,L]
+RewriteRule ^lista_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=2 [NC,L]
+RewriteRule ^novo_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=3 [NC,L]
+RewriteRule ^editar_usuario/([a-zA-Z-0-9]+)/?$ /tcc/controller/controlerUsuario.php?opcao=4&id=$1 [NC,L]
+
