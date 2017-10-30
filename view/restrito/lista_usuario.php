@@ -2,7 +2,7 @@
 include_once('admin.php');
 ?>
 <div class="responsive-table">
-    <table class="table table-hover">
+    <table class="table table-hover lista-usuario">
         <thead>
             <tr>
                 <th>ID</th>

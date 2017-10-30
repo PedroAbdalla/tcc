@@ -19,6 +19,14 @@ class usuarioDao{
         $sql->execute();
         return $sql->fetch(PDO::FETCH_OBJ);
     }
+    public function getUsuarioId($id)
+    {
+        $sql = $this->conn->prepare("SELECT id, login, nome, permicao FROM usuario where id=:id");
+        $sql->bindValue(':id',$id);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
+
     public function incluirUsuario(Usuario $usuario)
     {
      
@@ -39,6 +47,23 @@ class usuarioDao{
             $lista[] = $usuario;
         }
         return $lista;
+    }
+
+    public function editarUsuario(Usuario $usuario)
+    {
+        $sql = $this->conn->prepare("UPDATE usuario SET nome= :nome, permicao= :permicao WHERE id=:id");
+        $sql->bindValue(':id',$usuario->getId());
+        $sql->bindValue(':nome',$usuario->getNome());
+        $sql->bindValue(':permicao',$usuario->getPermicao());
+        $sql->execute();
+    }
+
+    public function editarSenha($senha, $id)
+    {
+        $sql = $this->conn->prepare("UPDATE usuario SET senha= :senha WHERE id=:id");
+        $sql->bindValue(':id',$id);
+        $sql->bindValue(':senha',$senha);
+        $sql->execute();
     }
 }
 ?>

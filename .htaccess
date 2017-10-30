@@ -9,4 +9,6 @@ RewriteRule ^enviar_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=1 [NC,
 RewriteRule ^lista_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=2 [NC,L]
 RewriteRule ^novo_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=3 [NC,L]
 RewriteRule ^editar_usuario/([a-zA-Z-0-9]+)/?$ /tcc/controller/controlerUsuario.php?opcao=4&id=$1 [NC,L]
+RewriteRule ^atualizar_usuario/?$ /tcc/controller/controlerUsuario.php?opcao=5 [NC,L]
+RewriteRule ^atualizar_senha/?$ /tcc/controller/controlerUsuario.php?opcao=6 [NC,L]
 
