@@ -63,6 +63,13 @@
         header("Location:../tcc/lista_usuario");
 
     }
+    if($opcao == 7){
+        if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
+            $caminho = '../view/restrito/tb_padrao.php';
+        } else {
+            $caminho = '../view/publico/erro.php';
+        }
+    }
     include_once('../view/publico/topo.php');
     include_once($caminho);
     include_once('../view/publico/footer.html');
