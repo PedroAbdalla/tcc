@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Jun-2017 às 02:32
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: 11-Dez-2017 às 20:15
+-- Versão do servidor: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -56,6 +58,29 @@ INSERT INTO `tabela_defoult` (`nome_imagem`, `fonetica`, `categoria`, `id`) VALU
 ('16.jpg', '', 'cores', 16),
 ('17.jog', '', 'formas', 17);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `login` varchar(145) DEFAULT NULL,
+  `senha` varchar(145) DEFAULT NULL,
+  `nome` varchar(145) DEFAULT NULL,
+  `permicao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `login`, `senha`, `nome`, `permicao`) VALUES
+(1, 'pedro', 'MTIzNDU=', 'Pedro Abdalla', 'a'),
+(2, 'joao', 'NDMyMQ==', 'João da Silva', 'n'),
+(3, 'maria', 'YWJjZA==', 'Maria Machado', 'a');
+
 --
 -- Indexes for dumped tables
 --
@@ -67,6 +92,12 @@ ALTER TABLE `tabela_defoult`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -75,9 +106,14 @@ ALTER TABLE `tabela_defoult`
 --
 ALTER TABLE `tabela_defoult`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-CREATE TABLE `tcc`.`usuario` ( `id` INT NOT NULL AUTO_INCREMENT , `login` VARCHAR NOT NULL , `senha` VARCHAR NOT NULL , `usuario` VARCHAR NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
