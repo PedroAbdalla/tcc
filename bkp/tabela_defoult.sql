@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Dez-2017 às 20:15
+-- Generation Time: 24-Maio-2018 às 02:39
 -- Versão do servidor: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -61,6 +61,50 @@ INSERT INTO `tabela_defoult` (`nome_imagem`, `fonetica`, `categoria`, `id`) VALU
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tabela_usuario_categoria`
+--
+
+CREATE TABLE `tabela_usuario_categoria` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `categoria` varchar(245) DEFAULT NULL,
+  `img` varchar(245) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tabela_usuario_categoria`
+--
+
+INSERT INTO `tabela_usuario_categoria` (`id`, `id_usuario`, `categoria`, `img`) VALUES
+(1, 1, 'cat 1', '1-cat-20180319165511000000-0.png'),
+(2, 1, 'cat2', '1-cat-20180319165511000000-1.jpeg'),
+(3, 1, 'cat 3', '1-cat-20180319165511000000-2.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tabela_usuario_imagens`
+--
+
+CREATE TABLE `tabela_usuario_imagens` (
+  `id` int(11) NOT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
+  `fonetica` varchar(245) DEFAULT NULL,
+  `imagem` varchar(245) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tabela_usuario_imagens`
+--
+
+INSERT INTO `tabela_usuario_imagens` (`id`, `id_categoria`, `fonetica`, `imagem`) VALUES
+(4, 1, 'burro', '4.jpg'),
+(6, 1, 'urso', '6.jpg'),
+(11, 2, '77777', '1-img-20180523015212000000.jpeg');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuario`
 --
 
@@ -78,8 +122,12 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `login`, `senha`, `nome`, `permicao`) VALUES
 (1, 'pedro', 'MTIzNDU=', 'Pedro Abdalla', 'a'),
-(2, 'joao', 'NDMyMQ==', 'João da Silva', 'n'),
-(3, 'maria', 'YWJjZA==', 'Maria Machado', 'a');
+(2, 'joao', 'NDMyMQ==', 'João da Silva 1', 'a'),
+(3, 'maria', 'YWJjZA==', 'Maria Machado', 'a'),
+(4, 'joana', 'YWJjZA==', 'Joana Arantes ', 'n'),
+(5, ' romualdo', 'MTIzNDU=', 'Romualdo Monteiro', 'a'),
+(6, 'romualdo ', 'MTIzNDU=', 'Romualdo Monteiro', 'a'),
+(7, 'joaona', 'YWJjZDEyMzQ1', 'Joana Cordeiro ', 'n');
 
 --
 -- Indexes for dumped tables
@@ -90,6 +138,20 @@ INSERT INTO `usuario` (`id`, `login`, `senha`, `nome`, `permicao`) VALUES
 --
 ALTER TABLE `tabela_defoult`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tabela_usuario_categoria`
+--
+ALTER TABLE `tabela_usuario_categoria`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_usuario_idx` (`id_usuario`);
+
+--
+-- Indexes for table `tabela_usuario_imagens`
+--
+ALTER TABLE `tabela_usuario_imagens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_categoria_fk_idx` (`id_categoria`);
 
 --
 -- Indexes for table `usuario`
@@ -108,10 +170,38 @@ ALTER TABLE `tabela_defoult`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `tabela_usuario_categoria`
+--
+ALTER TABLE `tabela_usuario_categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tabela_usuario_imagens`
+--
+ALTER TABLE `tabela_usuario_imagens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `tabela_usuario_categoria`
+--
+ALTER TABLE `tabela_usuario_categoria`
+  ADD CONSTRAINT `fk_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `tabela_usuario_imagens`
+--
+ALTER TABLE `tabela_usuario_imagens`
+  ADD CONSTRAINT `id_categoria_fk` FOREIGN KEY (`id_categoria`) REFERENCES `tabela_usuario_categoria` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
