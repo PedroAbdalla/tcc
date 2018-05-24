@@ -28,15 +28,13 @@ class usuarioDao{
     }
 
     public function incluirUsuario(Usuario $usuario)
-    {
-     
+    {     
         $sql = $this->conn->prepare("INSERT INTO usuario(login, senha, nome, permicao) VALUES (:a, :b, :c, :d)");
         $sql->bindValue(':a',$usuario->getLogin());
         $sql->bindValue(':b',$usuario->getSenha());
         $sql->bindValue(':c',$usuario->getNome());
         $sql->bindValue(':d',$usuario->getPermicao());
         $sql->execute();
-
     }
     public function listarUsuarios()
     {

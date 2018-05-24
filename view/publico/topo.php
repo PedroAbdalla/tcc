@@ -10,6 +10,7 @@
 
         <!-- Bootstrap JavaScript -->
         <script src="/../../tcc/lib/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+          
         
         <!-- Owl JavaScript -->
         <script src="/../../tcc/lib/owlcarousel/docs/assets/owlcarousel/owl.carousel.min.js"></script>        
@@ -31,12 +32,14 @@
         <!-- fontes icons  -->
         <link rel="stylesheet" href="/../../tcc/lib/fonte/font-awesome-4.7.0/css/font-awesome.min.css">
 
+        <?php include_once('../lib/php/funcoes.php'); ?>
     </head>
     <body>
         <script type="text/javascript">
             verificaCompatibilidade();
         </script> 
         <?php
+
             if(empty($_SESSION['usuarioLogado'])) {
                 include_once('login.php');
             } else {

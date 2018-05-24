@@ -1,10 +1,14 @@
 <?php
     require_once('../classes/usuario.php');
+    require_once('../classes/Tabela_usuario_imagens.php');
+    require_once('../classes/Tabela_usuario_Categoria.php');
     require_once('../dao/usuarioDao.inc');
+    require_once('../dao/usuarioCategoriaDao.php');
+    require_once('../dao/usuarioImagensDao.php');
     $opcao = (int)$_REQUEST['opcao'];
     session_start();
   
-    if($opcao == 1){
+    if ($opcao == 1) {
         $senha = base64_encode($_POST['senha']);
         $usuario = new Usuario($_POST['login'],$senha,$_POST['usuario'],$_POST['acesso']);
         $usuarioDao = new usuarioDao();
@@ -18,20 +22,20 @@
         $lista = $usuarioDao->listarUsuarios();
         $caminho = '../view/restrito/lista_usuario.php';
     }
-    if($opcao == 3){
+    if ($opcao == 3) {
         if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
             $caminho = '../view/restrito/novo_usuario.php';
         } else {
             $caminho = '../view/publico/erro.php';
         }
     }
-    if($opcao == 4){
+    if ($opcao == 4) {
         $id = (int)$_REQUEST['id'];
         $usuarioDao = new usuarioDao();
         $usuario = $usuarioDao->getUsuarioId($id);
         $caminho = '../view/restrito/editar_usuario.php';
     }
-    if($opcao == 5){
+    if ($opcao == 5) {
         $usuario = new Usuario($_POST['login'],0,$_POST['usuario'],$_POST['acesso']);
         $usuario->setId($_POST['id']);
 
@@ -43,11 +47,11 @@
         $_SESSION['tipo_msg'] = "ok";
 
     }
-    if($opcao == 6){
+    if ($opcao == 6) {
        $senha1 = $_POST['senha1'];
        $senha2 = $_POST['senha2'];
 
-       if($senha1 == $senha2){
+       if ($senha1 == $senha2) {
             $senha1 = base64_encode($senha1);
             $usuarioDao = new usuarioDao();
             $usuarioDao->editarSenha($senha1, $_POST['id']);
@@ -58,17 +62,105 @@
             $_SESSION['msg'] = "digite as duas senhas iguais";
             $_SESSION['tipo_msg'] = "erro";
        }
-
         
         header("Location:../tcc/lista_usuario");
 
     }
-    if($opcao == 7){
+    if($opcao == 7) {
         if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
+            $id = $_SESSION['usuarioLogado']['id'];
+            $usuarioCategoriaDao = new usuarioCategoriaDao();
+            $categorias = $usuarioCategoriaDao->listarCategorias($id);
             $caminho = '../view/restrito/tb_padrao.php';
         } else {
             $caminho = '../view/publico/erro.php';
         }
+    }
+    if($opcao == 8) {
+        $uploadfile = '';
+        if ($_FILES['img']['size'] > 0) {
+
+            $dirname = $_SESSION['usuarioLogado']['id'] . '/temporario' ;
+            $dir = "../imagens/$dirname/";
+            if(!is_dir($dir)){
+                mkdir($dir,0777);
+            }
+
+            $format =  explode('/', $_FILES['img']['type']);
+            $nome_arquivo = $_SESSION['usuarioLogado']['id'] . '-cat-' . date("YmdHisu") . '.'  . $format[1];
+            $uploadfile = $dir . basename($nome_arquivo);
+        }
+        if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile) || $_FILES['img']['size'] == 0) {
+            $cat = new Tabela_usuario_categoria($_SESSION['usuarioLogado']['id'],$_POST['categoria'], $nome_arquivo);
+            $usuarioCategoriaDao = new usuarioCategoriaDao();
+            $last_id = $usuarioCategoriaDao->incluirCategoria($cat);
+            $pasta_name = $_SESSION['usuarioLogado']['id'] . '/' . $last_id;
+            $pasta = "../imagens/$pasta_name/";
+            rename($dir, $pasta);
+            $_SESSION['msg'] = "Categoria adicionada com sucesso";
+            $_SESSION['tipo_msg'] = "ok";
+            header("Location:../tcc/lista_tabela_padrao");
+        } else {
+            $caminho = '../view/publico/erro.php';
+        }
+    }
+    if($opcao == 9) {       
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $lista = $usuarioCategoriaDao->listarCategorias($_SESSION['usuarioLogado']['id']);
+        include_once('../ajax/ajax_select_categorias.php');
+        exit;
+    }
+    if($opcao == 10) {  
+        $id_categoria = (int)$_REQUEST['id_categoria'];     
+        $usuarioImagensDao = new usuarioImagensDao();
+        $lista = $usuarioImagensDao->listarImagens($id_categoria);
+        include_once('../ajax/ajax_lista_imagens.php');
+        exit;
+    }
+    if($opcao == 11) {  
+        
+        $id_imagem = (int)$_REQUEST['id_imagem'];
+        $usuarioImagensDao = new usuarioImagensDao();
+        $imagem = $usuarioImagensDao->selecionarImagem($id_imagem);
+
+        $dir_imagem = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $imagem->id_categoria . "/" . $imagem->imagem;
+        if(unlink($dir_imagem) == true) {
+            $lista = $usuarioImagensDao->excluirImagem($id_imagem);
+        }
+        exit;
+    }
+    if($opcao == 12) {
+       
+        $dir = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $_POST['id_categoria'] . "/";
+        $format =  explode('/', $_FILES['img']['type']);
+        $nome_arquivo = $_SESSION['usuarioLogado']['id'] . '-img-' . date("YmdHisu") . '.'  . $format[1];
+        $uploadfile = $dir . basename($nome_arquivo);
+
+        if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
+            $nova_imagem = new Tabela_usuario_imagens($_POST['id_categoria'], $_POST['fonetica'], $nome_arquivo);
+            $usuarioImagensDao = new usuarioImagensDao();
+            $usuarioImagensDao->incluirImagem($nova_imagem);
+            
+            $_SESSION['msg'] = "Imagem adicionada com sucesso";
+            $_SESSION['tipo_msg'] = "ok";
+            header("Location:../tcc/lista_tabela_padrao");
+        } else {
+            $caminho = '../view/publico/erro.php';
+        }
+    }
+    if($opcao == 13) {
+        $id_categoria = (int)$_REQUEST['id_categoria'];
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $usuarioCategoriaDao->excluirCategoria($_SESSION['usuarioLogado']['id'], $id_categoria);
+        $_SESSION['msg'] = "Categoria excluída com sucesso";
+        $_SESSION['tipo_msg'] = "ok";
+
+
+        $dirname = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $id_categoria;
+        array_map('unlink', glob("$dirname/*.*"));
+        rmdir($dirname);
+
+        header("Location:../../tcc/lista_tabela_padrao");
     }
     include_once('../view/publico/topo.php');
     include_once($caminho);

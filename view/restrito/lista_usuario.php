@@ -13,7 +13,7 @@ include_once('admin.php');
         </thead>
         <tbody>
             <?php foreach ($lista as $l) {  ?>
-                <tr onclick="window.location='/tcc/editar_usuario/<?= $l->id ?>'"">
+                <tr onclick="window.location='/tcc/editar_usuario/<?= $l->id ?>'">
                     <td><?= $l->id ?></td>
                     <td><?= $l->nome ?></td>
                     <td><?= $l->login ?></td>
