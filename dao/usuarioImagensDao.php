@@ -11,16 +11,6 @@ class usuarioImagensDao{
         $c = new Conexao();
         $this->conn = $c->getConexao();
     }
-   
-   
-    // public function incluirCategoria(Tabela_usuario_categoria $cat)
-    // {     
-    //     $sql = $this->conn->prepare("INSERT INTO tabela_usuario_categoria(id_usuario, categoria, img) VALUES (:a, :b, :c)");
-    //     $sql->bindValue(':a',$cat->getId_usuario());
-    //     $sql->bindValue(':b',$cat->getCategoria());
-    //     $sql->bindValue(':c',$cat->getImg());
-    //     $sql->execute();
-    // }
     public function listarImagens($id_categoria)
     {
         $sql = $this->conn->prepare("SELECT * FROM tabela_usuario_imagens where id_categoria=:id_categoria");
@@ -54,5 +44,20 @@ class usuarioImagensDao{
         $sql->bindValue(':c',$img->getImagem());
         $sql->execute();
     }
+    public function CloneImagens($id_usuario)
+    {
+        $sql = $this->conn->prepare("SELECT d.id as id_categoria, fonetica, imagem FROM tabela_usuario_imagens LEFT JOIN tabela_usuario_categoria c ON id_categoria = c.id LEFT JOIN tabela_usuario_categoria d ON c.categoria = d.categoria AND d.id_usuario =:id_usuario");
+        $sql->bindValue(':id_usuario', $id_usuario);
+        $sql->execute();
+        while($tb = $sql->fetch(PDO::FETCH_OBJ))
+        {
+            $sql1 = $this->conn->prepare("INSERT INTO tabela_usuario_imagens(id_categoria, fonetica, imagem) VALUES (:a, :b, :c)");
+            $sql1->bindValue(':a',$tb->id_categoria);
+            $sql1->bindValue(':b',$tb->fonetica);
+            $sql1->bindValue(':c',$tb->imagem);
+            $sql1->execute();
+        }
+    }
+    
 }
 ?>

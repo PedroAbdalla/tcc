@@ -35,6 +35,7 @@ class usuarioDao{
         $sql->bindValue(':c',$usuario->getNome());
         $sql->bindValue(':d',$usuario->getPermicao());
         $sql->execute();
+        return $this->conn->lastInsertId(); 
     }
     public function listarUsuarios()
     {

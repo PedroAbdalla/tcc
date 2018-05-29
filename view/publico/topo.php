@@ -32,7 +32,6 @@
         <!-- fontes icons  -->
         <link rel="stylesheet" href="/../../tcc/lib/fonte/font-awesome-4.7.0/css/font-awesome.min.css">
 
-        <?php include_once('../lib/php/funcoes.php'); ?>
     </head>
     <body>
         <script type="text/javascript">

@@ -5,6 +5,7 @@
     require_once('../dao/usuarioDao.inc');
     require_once('../dao/usuarioCategoriaDao.php');
     require_once('../dao/usuarioImagensDao.php');
+    include_once('../lib/php/funcoes.php');
     $opcao = (int)$_REQUEST['opcao'];
     session_start();
   
@@ -12,7 +13,20 @@
         $senha = base64_encode($_POST['senha']);
         $usuario = new Usuario($_POST['login'],$senha,$_POST['usuario'],$_POST['acesso']);
         $usuarioDao = new usuarioDao();
-        $usuarioDao->incluirUsuario($usuario);
+        $last_id = $usuarioDao->incluirUsuario($usuario);
+
+
+        $source = "../imagens/1";
+        $dest = "../imagens/$last_id";
+
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $usuarioCategoriaDao->cloneCategorias($last_id);
+
+        $usuarioImagensDao = new usuarioImagensDao();
+        $usuarioImagensDao->CloneImagens($last_id);
+
+        rcopy($source, $dest);
+
         header("Location:../tcc/lista_usuario");
         $_SESSION['msg'] = "Usuario incluido com sucesso";
         $_SESSION['tipo_msg'] = "ok";
@@ -82,8 +96,8 @@
 
             $dirname = $_SESSION['usuarioLogado']['id'] . '/temporario' ;
             $dir = "../imagens/$dirname/";
-            if(!is_dir($dir)){
-                mkdir($dir,0777);
+            if(!file_exists($dir)){
+                mkdir($dir, 0777, true);
             }
 
             $format =  explode('/', $_FILES['img']['type']);
@@ -91,12 +105,19 @@
             $uploadfile = $dir . basename($nome_arquivo);
         }
         if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile) || $_FILES['img']['size'] == 0) {
-            $cat = new Tabela_usuario_categoria($_SESSION['usuarioLogado']['id'],$_POST['categoria'], $nome_arquivo);
+            
+            $repositorio = $_SESSION['usuarioLogado']['id'] . '.cat.' . date("YmdHisu");
+            $cat = new Tabela_usuario_categoria($_SESSION['usuarioLogado']['id'],$_POST['categoria'], $nome_arquivo, $repositorio);
             $usuarioCategoriaDao = new usuarioCategoriaDao();
             $last_id = $usuarioCategoriaDao->incluirCategoria($cat);
-            $pasta_name = $_SESSION['usuarioLogado']['id'] . '/' . $last_id;
+
+            $usuarioCategoriaDao = new usuarioCategoriaDao();
+            $imagem = $usuarioCategoriaDao->pegarCategorias($last_id);
+
+            $pasta_name = $_SESSION['usuarioLogado']['id'] . '/' . $imagem->repositorio;
             $pasta = "../imagens/$pasta_name/";
             rename($dir, $pasta);
+
             $_SESSION['msg'] = "Categoria adicionada com sucesso";
             $_SESSION['tipo_msg'] = "ok";
             header("Location:../tcc/lista_tabela_padrao");
@@ -111,9 +132,16 @@
         exit;
     }
     if($opcao == 10) {  
-        $id_categoria = (int)$_REQUEST['id_categoria'];     
+        $id_categoria = (int)$_REQUEST['id_categoria'];
+
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $cat = $usuarioCategoriaDao->pegarCategorias($id_categoria);
+
+        $repositorio = $cat->repositorio;
+
         $usuarioImagensDao = new usuarioImagensDao();
         $lista = $usuarioImagensDao->listarImagens($id_categoria);
+
         include_once('../ajax/ajax_lista_imagens.php');
         exit;
     }
@@ -123,15 +151,20 @@
         $usuarioImagensDao = new usuarioImagensDao();
         $imagem = $usuarioImagensDao->selecionarImagem($id_imagem);
 
-        $dir_imagem = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $imagem->id_categoria . "/" . $imagem->imagem;
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $cat = $usuarioCategoriaDao->pegarCategorias($imagem->id_categoria);
+
+        $dir_imagem = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $cat->repositorio . "/" . $imagem->imagem;
         if(unlink($dir_imagem) == true) {
             $lista = $usuarioImagensDao->excluirImagem($id_imagem);
         }
         exit;
     }
     if($opcao == 12) {
-       
-        $dir = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $_POST['id_categoria'] . "/";
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $imagem = $usuarioCategoriaDao->pegarCategorias($_POST['id_categoria']);
+
+        $dir = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $imagem->repositorio . "/";
         $format =  explode('/', $_FILES['img']['type']);
         $nome_arquivo = $_SESSION['usuarioLogado']['id'] . '-img-' . date("YmdHisu") . '.'  . $format[1];
         $uploadfile = $dir . basename($nome_arquivo);
@@ -151,12 +184,14 @@
     if($opcao == 13) {
         $id_categoria = (int)$_REQUEST['id_categoria'];
         $usuarioCategoriaDao = new usuarioCategoriaDao();
+
+        $cat = $usuarioCategoriaDao->pegarCategorias($id_categoria);
         $usuarioCategoriaDao->excluirCategoria($_SESSION['usuarioLogado']['id'], $id_categoria);
         $_SESSION['msg'] = "Categoria excluída com sucesso";
         $_SESSION['tipo_msg'] = "ok";
 
 
-        $dirname = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $id_categoria;
+        $dirname = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $cat->repositorio;
         array_map('unlink', glob("$dirname/*.*"));
         rmdir($dirname);
 

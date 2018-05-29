@@ -7,16 +7,16 @@
             <li class="text-right"> 
                 <a href="apagar_categoria/<?= $c->id ?>" onclick="return confirm('Deseja apagar a categoria e todas suas imagens?')"><span class="glyphicon glyphicon-remove"></span></a>
                 <?php if(!empty($c->img)){ ?>
-                    <div><img width="201" height="115" src="imagens/<?= $c->id_usuario ?>/<?= $c->id ?>/<?= $c->img ?>"></div>
+                    <div><img width="201" height="115" src="imagens/<?= $c->id_usuario ?>/<?= $c->repositorio ?>/<?= $c->img ?>"></div>
                 <?php } ?>
                 <div><input class="form-control text-center" type="text" name="categorias" value="<?= $c->categoria ?>" readonly></div>
             </li>
         <?php } ?>
     </ul>
-    <div class="row">
-        <div class="col-xs-12 text-right">
-            <button type="button" class="btn btn-default" onclick="trocarAba(1, 'tb-Imagens');">Próximo</button>
-        </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 text-right">
+        <button type="button" class="btn btn-default" onclick="trocarAba(1, 'tb-Imagens');">Próximo</button>
     </div>
 </div>
 <form enctype="multipart/form-data" method="post" action="enviar_categoria">
