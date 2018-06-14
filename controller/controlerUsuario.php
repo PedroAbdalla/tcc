@@ -1,4 +1,5 @@
 <?php
+
     require_once('../classes/usuario.php');
     require_once('../classes/Tabela_usuario_imagens.php');
     require_once('../classes/Tabela_usuario_Categoria.php');
@@ -11,6 +12,9 @@
   
     if ($opcao == 1) {
         $senha = base64_encode($_POST['senha']);
+        if(empty($_POST['acesso'])) {
+            $_POST['acesso'] = 'n';
+        }
         $usuario = new Usuario($_POST['login'],$senha,$_POST['usuario'],$_POST['acesso']);
         $usuarioDao = new usuarioDao();
         $last_id = $usuarioDao->incluirUsuario($usuario);
@@ -27,7 +31,11 @@
 
         rcopy($source, $dest);
 
-        header("Location:../tcc/lista_usuario");
+        if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
+            header("Location:../tcc/lista_usuario");
+        } else {
+             header("Location:../tcc/index");
+        }
         $_SESSION['msg'] = "Usuario incluido com sucesso";
         $_SESSION['tipo_msg'] = "ok";
     }
@@ -37,9 +45,14 @@
         $caminho = '../view/restrito/lista_usuario.php';
     }
     if ($opcao == 3) {
+        $tipo = $_REQUEST['tipo'];
         if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
             $caminho = '../view/restrito/novo_usuario.php';
-        } else {
+        } 
+        else if ($tipo == 'n') {
+            $caminho = '../view/publico/cadastrar_usuario.php';
+        }
+        else {
             $caminho = '../view/publico/erro.php';
         }
     }
@@ -76,19 +89,25 @@
             $_SESSION['msg'] = "digite as duas senhas iguais";
             $_SESSION['tipo_msg'] = "erro";
        }
-        
-        header("Location:../tcc/lista_usuario");
+       if($_SESSION['usuarioLogado']['permicao'] == 'a'){
+            header("Location:../tcc/lista_usuario");
+        } else {
+            header("Location:../../tcc/index");
+        }
 
     }
     if($opcao == 7) {
-        if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
-            $id = $_SESSION['usuarioLogado']['id'];
-            $usuarioCategoriaDao = new usuarioCategoriaDao();
-            $categorias = $usuarioCategoriaDao->listarCategorias($id);
+        if(!empty($_REQUEST['id_tabela']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){
+            $id = 1;
             $caminho = '../view/restrito/tb_padrao.php';
         } else {
-            $caminho = '../view/publico/erro.php';
+            $id = $_SESSION['usuarioLogado']['id'];
+            $caminho = '../view/publico/tb_usuario.php';
         }
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $categorias = $usuarioCategoriaDao->listarCategorias($id);
+        
+        
     }
     if($opcao == 8) {
         $uploadfile = '';
@@ -200,4 +219,5 @@
     include_once('../view/publico/topo.php');
     include_once($caminho);
     include_once('../view/publico/footer.html');
+
 ?>

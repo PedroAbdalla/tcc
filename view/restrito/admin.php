@@ -1,4 +1,5 @@
 <?php 
+
 if(!empty($_SESSION['msg'])){
     msg($_SESSION['msg'], $_SESSION['tipo_msg']);
 }

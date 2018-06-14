@@ -44,6 +44,9 @@
             } else {
                 include_once('usuario.php');
             }
+            if(!empty($_SESSION['msg'])){
+                msg($_SESSION['msg'], $_SESSION['tipo_msg']);
+            }
         ?>
         <div class="topo">
             <div>
@@ -75,6 +78,12 @@
                         <?php
                         if(!empty($_SESSION['usuarioLogado']) && $_SESSION['usuarioLogado']['permicao'] == 'a'){ ?>
                             <li><a href="/tcc/admin">Admin</a></li>
+                        <?php } ?>
+                        <?php
+                        if(empty($_SESSION['usuarioLogado'])){ ?>
+                            <li><a href="/tcc/cadastrar_usuario/">Cadastrar</a></li>
+                        <?php } else { ?>
+                            <li><a href="/tcc/editar_tabela/">Editar Tabela</a></li>
                         <?php } ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

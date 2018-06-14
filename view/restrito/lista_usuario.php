@@ -8,7 +8,7 @@ include_once('admin.php');
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Login</th>
-                <th>Permição de acesso</th>
+                <th>Permissão de acesso</th>
             </tr>
         </thead>
         <tbody>

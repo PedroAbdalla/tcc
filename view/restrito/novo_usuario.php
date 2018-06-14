@@ -15,7 +15,7 @@ include_once('admin.php');
 		<input type="text" name="usuario" class="form-control" placeholder="Nome">
 	</div>
 	<div class="form-group">
-		<label>Permição de acesso</label>
+		<label>Permissão de acesso</label>
 		<div class="radio">
 			<label>
 				<input type="radio" name="acesso" value="n" checked=""> Normal
