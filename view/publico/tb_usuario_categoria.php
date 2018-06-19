@@ -16,10 +16,10 @@
 </div>
 <div class="row">
     <div class="col-xs-12 text-right">
-        <button type="button" class="btn btn-default" onclick="trocarAba(1, 'tb-Imagens');">Próximo</button>
+        <button type="button" class="btn btn-default" onclick="trocarAba(1, 'tb-Imagens', 0);">Próximo</button>
     </div>
 </div>
-<form enctype="multipart/form-data" method="post" action="enviar_categoria">
+<form enctype="multipart/form-data" method="post" action="../../tcc/enviar_categoria">
     <div id="modal-categoria" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

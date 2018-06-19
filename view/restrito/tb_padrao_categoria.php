@@ -5,9 +5,9 @@
     <ul class="list-inline">
         <?php foreach ($categorias as $c) {  ?>   
             <li class="text-right"> 
-                <a href="apagar_categoria/<?= $c->id ?>" onclick="return confirm('Deseja apagar a categoria e todas suas imagens?')"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="../../tcc/apagar_categoria_padrao/<?= $c->id ?>/1" onclick="return confirm('Deseja apagar a categoria e todas suas imagens?')"><span class="glyphicon glyphicon-remove"></span></a>
                 <?php if(!empty($c->img)){ ?>
-                    <div><img width="201" height="115" src="imagens/<?= $c->id_usuario ?>/<?= $c->repositorio ?>/<?= $c->img ?>"></div>
+                    <div><img width="201" height="115" src="./../tcc/imagens/<?= $c->id_usuario ?>/<?= $c->repositorio ?>/<?= $c->img ?>"></div>
                 <?php } ?>
                 <div><input class="form-control text-center" type="text" name="categorias" value="<?= $c->categoria ?>" readonly></div>
             </li>
@@ -16,10 +16,10 @@
 </div>
 <div class="row">
     <div class="col-xs-12 text-right">
-        <button type="button" class="btn btn-default" onclick="trocarAba(1, 'tb-Imagens');">Próximo</button>
+        <button type="button" class="btn btn-default" onclick="trocarAba(1, 'tb-Imagens', 1);">Próximo</button>
     </div>
 </div>
-<form enctype="multipart/form-data" method="post" action="enviar_categoria">
+<form enctype="multipart/form-data" method="post" action="enviar_categoria_padrao/1">
     <div id="modal-categoria" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

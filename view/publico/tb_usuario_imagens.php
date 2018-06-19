@@ -14,10 +14,10 @@
 </div>
 <div class="row">
 	<div class="col-xs-6">
-		<button type="button" class="btn btn-default" onclick="trocarAba(0, 'tb-Categorias')">Voltar</button>
+		<button type="button" class="btn btn-default" onclick="trocarAba(0, 'tb-Categorias', 0)">Voltar</button>
 	</div>
 </div>
-<form enctype="multipart/form-data" method="post" action="enviar_imagem">
+<form enctype="multipart/form-data" method="post" action="../../tcc/enviar_imagem">
 	<input type="hidden" class="id-categoria-imagem" name="id_categoria" value="">
     <div id="modal-imagem" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

@@ -46,7 +46,7 @@ class usuarioImagensDao{
     }
     public function CloneImagens($id_usuario)
     {
-        $sql = $this->conn->prepare("SELECT d.id as id_categoria, fonetica, imagem FROM tabela_usuario_imagens LEFT JOIN tabela_usuario_categoria c ON id_categoria = c.id LEFT JOIN tabela_usuario_categoria d ON c.categoria = d.categoria AND d.id_usuario =:id_usuario");
+        $sql = $this->conn->prepare("SELECT DISTINCT d.id as id_categoria, fonetica, imagem FROM tabela_usuario_imagens LEFT JOIN tabela_usuario_categoria c ON id_categoria = c.id LEFT JOIN tabela_usuario_categoria d ON c.categoria = d.categoria AND d.id_usuario =:id_usuario");
         $sql->bindValue(':id_usuario', $id_usuario);
         $sql->execute();
         while($tb = $sql->fetch(PDO::FETCH_OBJ))

@@ -110,6 +110,11 @@
         
     }
     if($opcao == 8) {
+        if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+            $id_nova_categoria = $_REQUEST['padrao'];
+        } else {
+            $id_nova_categoria = $_SESSION['usuarioLogado']['id'];
+        }
         $uploadfile = '';
         if ($_FILES['img']['size'] > 0) {
 
@@ -120,33 +125,42 @@
             }
 
             $format =  explode('/', $_FILES['img']['type']);
-            $nome_arquivo = $_SESSION['usuarioLogado']['id'] . '-cat-' . date("YmdHisu") . '.'  . $format[1];
+            $nome_arquivo = $id_nova_categoria . '-cat-' . date("YmdHisu") . '.'  . $format[1];
             $uploadfile = $dir . basename($nome_arquivo);
         }
         if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile) || $_FILES['img']['size'] == 0) {
             
-            $repositorio = $_SESSION['usuarioLogado']['id'] . '.cat.' . date("YmdHisu");
-            $cat = new Tabela_usuario_categoria($_SESSION['usuarioLogado']['id'],$_POST['categoria'], $nome_arquivo, $repositorio);
+            $repositorio = $id_nova_categoria . '.cat.' . date("YmdHisu");
+            $cat = new Tabela_usuario_categoria($id_nova_categoria,$_POST['categoria'], $nome_arquivo, $repositorio);
             $usuarioCategoriaDao = new usuarioCategoriaDao();
             $last_id = $usuarioCategoriaDao->incluirCategoria($cat);
 
             $usuarioCategoriaDao = new usuarioCategoriaDao();
             $imagem = $usuarioCategoriaDao->pegarCategorias($last_id);
 
-            $pasta_name = $_SESSION['usuarioLogado']['id'] . '/' . $imagem->repositorio;
+            $pasta_name = $id_nova_categoria . '/' . $imagem->repositorio;
             $pasta = "../imagens/$pasta_name/";
             rename($dir, $pasta);
 
             $_SESSION['msg'] = "Categoria adicionada com sucesso";
             $_SESSION['tipo_msg'] = "ok";
-            header("Location:../tcc/lista_tabela_padrao");
+            if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+                header("Location:../../tcc/lista_tabela_padrao");
+            } else {
+                header("Location:../../tcc/editar_tabela");
+            }
         } else {
             $caminho = '../view/publico/erro.php';
         }
     }
-    if($opcao == 9) {       
+    if($opcao == 9) {
+        if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+            $id_usuario_categoria = $_REQUEST['padrao'];
+        } else {
+            $id_usuario_categoria = $_SESSION['usuarioLogado']['id'];
+        }
         $usuarioCategoriaDao = new usuarioCategoriaDao();
-        $lista = $usuarioCategoriaDao->listarCategorias($_SESSION['usuarioLogado']['id']);
+        $lista = $usuarioCategoriaDao->listarCategorias($id_usuario_categoria);
         include_once('../ajax/ajax_select_categorias.php');
         exit;
     }
@@ -180,12 +194,17 @@
         exit;
     }
     if($opcao == 12) {
+        if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+            $id_nova_imagem = $_REQUEST['padrao'];
+        } else {
+            $id_nova_imagem = $_SESSION['usuarioLogado']['id'];
+        }
         $usuarioCategoriaDao = new usuarioCategoriaDao();
         $imagem = $usuarioCategoriaDao->pegarCategorias($_POST['id_categoria']);
 
-        $dir = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $imagem->repositorio . "/";
+        $dir = "../imagens/" . $id_nova_imagem . "/" . $imagem->repositorio . "/";
         $format =  explode('/', $_FILES['img']['type']);
-        $nome_arquivo = $_SESSION['usuarioLogado']['id'] . '-img-' . date("YmdHisu") . '.'  . $format[1];
+        $nome_arquivo = $id_nova_imagem . '-img-' . date("YmdHisu") . '.'  . $format[1];
         $uploadfile = $dir . basename($nome_arquivo);
 
         if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
@@ -195,26 +214,39 @@
             
             $_SESSION['msg'] = "Imagem adicionada com sucesso";
             $_SESSION['tipo_msg'] = "ok";
-            header("Location:../tcc/lista_tabela_padrao");
+            if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+                header("Location:../../tcc/lista_tabela_padrao");
+            } else {
+                header("Location:../../tcc/editar_tabela");
+            }
         } else {
-            $caminho = '../view/publico/erro.php';
+            $caminho = '../../tcc/view/publico/erro.php';
         }
     }
     if($opcao == 13) {
+        if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+            $id_usuario_categoria = $_REQUEST['padrao'];
+        } else {
+            $id_usuario_categoria = $_SESSION['usuarioLogado']['id'];
+        }
         $id_categoria = (int)$_REQUEST['id_categoria'];
         $usuarioCategoriaDao = new usuarioCategoriaDao();
 
         $cat = $usuarioCategoriaDao->pegarCategorias($id_categoria);
-        $usuarioCategoriaDao->excluirCategoria($_SESSION['usuarioLogado']['id'], $id_categoria);
+        $usuarioCategoriaDao->excluirCategoria($id_usuario_categoria, $id_categoria);
         $_SESSION['msg'] = "Categoria excluída com sucesso";
         $_SESSION['tipo_msg'] = "ok";
 
 
-        $dirname = "../imagens/" . $_SESSION['usuarioLogado']['id'] . "/" . $cat->repositorio;
+        $dirname = "../imagens/" . $id_usuario_categoria . "/" . $cat->repositorio;
         array_map('unlink', glob("$dirname/*.*"));
         rmdir($dirname);
-
-        header("Location:../../tcc/lista_tabela_padrao");
+        
+        if(!empty($_REQUEST['padrao']) && $_SESSION['usuarioLogado']['permicao'] == 'a') {
+            header("Location:../../../tcc/lista_tabela_padrao");
+        } else {
+            header("Location:../../tcc/editar_tabela");
+        }
     }
     include_once('../view/publico/topo.php');
     include_once($caminho);
