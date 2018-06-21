@@ -248,6 +248,18 @@
             header("Location:../../tcc/editar_tabela");
         }
     }
+    if($opcao == 14) {
+        $id_usuario = $_REQUEST['id_usuario'];
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $retorno = $usuarioCategoriaDao->listarTalk($id_usuario);
+        $palavras = array();
+        foreach ($retorno as $key => $value) {
+            array_push($palavras, $value->categoria);
+        }
+        echo json_encode($palavras);
+
+        exit;
+    }
     include_once('../view/publico/topo.php');
     include_once($caminho);
     include_once('../view/publico/footer.html');

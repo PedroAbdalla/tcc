@@ -25,6 +25,7 @@ RewriteRule ^enviar_imagem_padrao/([a-zA-Z-0-9]+)/?$ /tcc/controller/controlerUs
 RewriteRule ^enviar_imagem/?$ /tcc/controller/controlerUsuario.php?opcao=12 [NC,L]
 RewriteRule ^apagar_categoria/([a-zA-Z-0-9]+)/?$ /tcc/controller/controlerUsuario.php?opcao=13&id_categoria=$1 [NC,L]
 RewriteRule ^apagar_categoria_padrao/([a-zA-Z-0-9]+)/([a-zA-Z-0-9]+)/?$ /tcc/controller/controlerUsuario.php?opcao=13&id_categoria=$1&padrao=1 [NC,L]
+RewriteRule ^listar_palavras/([a-zA-Z-0-9]+)/?$ /tcc/controller/controlerUsuario.php?opcao=14&id_usuario=$1 [NC,L]
 
 RewriteRule ^enviar_tabela_usuario/?$ /tcc/controller/controlerTabelaUsuario.php?opcao=1 [NC,L]
 

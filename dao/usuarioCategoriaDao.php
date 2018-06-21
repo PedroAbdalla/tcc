@@ -36,6 +36,18 @@ class usuarioCategoriaDao{
         }
         return $lista;
     }
+    public function listarTalk($id_usuario)
+    {
+        $sql = $this->conn->prepare("SELECT categoria from tabela_usuario_categoria where id_usuario =:id_usuario union SELECT fonetica FROM tabela_usuario_imagens i LEFT JOIN tabela_usuario_categoria c ON c.id = i.id_categoria where id_usuario =:id_usuario  order by categoria");
+        $sql->bindValue(':id_usuario',$id_usuario);
+        $sql->execute();
+        $lista = array();
+        while($tb = $sql->fetch(PDO::FETCH_OBJ))
+        {
+            $lista[] = $tb;
+        }
+        return $lista;
+    }
 
     public function pegarCategorias($id)
     {
