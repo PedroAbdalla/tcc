@@ -1,12 +1,13 @@
 <?php
 require_once('../dao/tabelaDao.inc');
 $tabelaDao = new tabelaDao();
-$lista = $tabelaDao->getTabela($_POST['valorCategoria']); ?>
-<div class="prancha-ajax">
-    <?php foreach ($lista as $tb) { ?>
-        <div><img  class="figura img-thumbnail" src="../tcc/imagens/<?php echo $tb->nome_imagem ?>" data-text="<?php echo $tb->fonetica ?>"></div>
+!empty($_SESSION['usuarioLogado']['id']) ? $us = $_SESSION['usuarioLogado']['id'] : $us = 1;
+?>
+<ul class="list-inline prancha-ajax">
+    <?php foreach ($lista as $l) { ?>
+        <li><img width="100" height="100" class="figura img-thumbnail" src="../../../tcc/imagens/<?= $us ?>/<?= $repositorio ?>/<?= $l->imagem ?>" data-text="<?php echo $l->fonetica ?>"></li>
     <?php } ?>
-</div>
+</ul>
 <script type="text/javascript">
     jQuery(function() {
         setTimeout(function(){

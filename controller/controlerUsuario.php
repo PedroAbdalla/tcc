@@ -260,6 +260,14 @@
 
         exit;
     }
+    if($opcao == 15) {
+        $id_categoria = (int)$_REQUEST['id_categoria'];
+        $repositorio = $_REQUEST['repositorio'];
+        $usuarioImagensDao = new usuarioImagensDao();
+        $lista = $usuarioImagensDao->listarImagens($id_categoria);
+        include_once('../../tcc/ajax/ajaxPrancha.php');
+        exit;
+    }
     include_once('../view/publico/topo.php');
     include_once($caminho);
     include_once('../view/publico/footer.html');

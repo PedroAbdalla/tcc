@@ -1,6 +1,6 @@
 <?php
    
-    if(empty($categoria)){
+    if(empty($categorias)){
         header("Location:../controller/controlerTabela.php?opcao=1");
     }
 ?>
@@ -8,9 +8,10 @@
     <div class="row">
         <div class="large-12 columns">
             <div class="owl-carousel owl-theme">
-                <?php foreach ($categoria as $c) {  ?>
-                    <div class="item item-categoria" onclick="abrirCategoria(this)" categoria="<?= $c->categoria ?>">
-                        <h4><?= $c->categoria ?></h4>
+                <?php foreach ($categorias as $c) {  ?>
+                    <div class="item item-categoria" onclick="abrirCategoria(this)" categoria="<?= $c->id ?>" rsp="<?= $c->repositorio ?>">
+                        <img src="../../tcc/imagens/<?= $c->id_usuario ?>/<?= $c->repositorio ?>/<?= $c->img ?>">
+                        <div><?= $c->categoria ?></div>
                     </div>
                 <?php } ?>
             </div>
@@ -25,6 +26,8 @@
         loop:true,
         nav:true,
         margin:10,
+        // navText: [&#x27;poróximo&#x27;,&#x27;anterior&#x27;],
+        dots: true,
         responsive:{
             0:{
                 items:2

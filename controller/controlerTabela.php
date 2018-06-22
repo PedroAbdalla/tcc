@@ -1,11 +1,19 @@
 <?php
     require_once('../classes/modeloTabela.inc');
     require_once('../dao/tabelaDao.inc');
+    require_once('../classes/usuario.php');
+    require_once('../classes/Tabela_usuario_imagens.php');
+    require_once('../classes/Tabela_usuario_Categoria.php');
+    require_once('../dao/usuarioDao.inc');
+    require_once('../dao/usuarioCategoriaDao.php');
+    require_once('../dao/usuarioImagensDao.php');
+    include_once('../lib/php/funcoes.php');
     $opcao = (int)$_REQUEST['opcao'];
+    empty($_SESSION['usuarioLogado']['id']) ? $id_tabela = 1 :  $id_tabela = $_SESSION['usuarioLogado']['id'];
 	session_start();
     if($opcao == 1){
-        $tabelaDao = new tabelaDao();
-        $categoria = $tabelaDao->getCategoria();
+        $usuarioCategoriaDao = new usuarioCategoriaDao();
+        $categorias = $usuarioCategoriaDao->listarCategorias($id_tabela);
         $caminho = '../view/publico/index.php';
     }
     if($opcao == 2){

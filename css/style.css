@@ -125,12 +125,25 @@
     height: 80px !important;
     text-align: center;
     cursor: pointer;
+    padding: 3px;
+    position: relative;
 }
-.item.item-categoria > h4{
-    line-height: 80px;
+.item.item-categoria > img {
+    height: 40px;
+    margin: 0px auto 2px;
+    width: auto;
+}
+.item.item-categoria > div {
     margin: 0px !important;
     text-transform: capitalize;
     color: white;
+    font-size: 11pt;
+    max-height: 36px;
+    position: absolute;
+    bottom: 2px;
+    text-align: center;
+    width: 98%;
+    overflow: hidden;
 }
 .owl-nav > div{
    position: absolute;
@@ -158,15 +171,18 @@
 }
 .prancha .prancha-ajax {
     width: 100%;
-    padding: 5px 3px;
+    padding: 0px -15px 0px 8px;
+}
+.prancha .prancha-ajax li {
+    margin-bottom: 15px;
 }
 .prancha-ajax > div {
     display: inline-block;
     width: 19%;
 }
 .prancha img{
-    width: 100%;
-    height: 115px;
+    width: 15vw;
+    min-width: 70px;
     padding: 3px;
     cursor: pointer;
 }
@@ -211,7 +227,7 @@ h4, .logos{
 /*-------------------editar usuario-------------------*/
 /*-------------------tb-padrao-------------------*/
 .tab-tb-categora, .tab-tb-imagens{
-    margin: 10px;
+    margin: 10px 0px;
 }
 /*-------------------categorias usuario------------------*/
 .edit-cats{    
