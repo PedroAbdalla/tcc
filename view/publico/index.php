@@ -1,7 +1,7 @@
 <?php
    
     if(empty($categorias)){
-        header("Location:../controller/controlerTabela.php?opcao=1");
+        header("Location:../../tcc/index");
     }
 ?>
 <section id="demos">
@@ -10,7 +10,9 @@
             <div class="owl-carousel owl-theme">
                 <?php foreach ($categorias as $c) {  ?>
                     <div class="item item-categoria" onclick="abrirCategoria(this)" categoria="<?= $c->id ?>" rsp="<?= $c->repositorio ?>">
-                        <img src="../../tcc/imagens/<?= $c->id_usuario ?>/<?= $c->repositorio ?>/<?= $c->img ?>">
+                        <?php if ($c->img) { ?>
+                            <img src="../../tcc/imagens/<?= $c->id_usuario ?>/<?= $c->repositorio ?>/<?= $c->img ?>">
+                        <?php } ?>
                         <div><?= $c->categoria ?></div>
                     </div>
                 <?php } ?>
@@ -26,7 +28,7 @@
         loop:true,
         nav:true,
         margin:10,
-        // navText: [&#x27;poróximo&#x27;,&#x27;anterior&#x27;],
+        navText: ['<<','>>'],
         dots: true,
         responsive:{
             0:{

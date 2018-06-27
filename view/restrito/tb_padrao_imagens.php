@@ -2,7 +2,7 @@
 	<div class="edit-cats">
 		<div class="form-group">
 	        <label>Categoria</label>
-	        <select name="categoria" class="form-control" onchange="listarImagens(this)">
+	        <select name="categoria" class="form-control" onchange="listarImagensPadrao(this)">
 	        		<option></option>
 	        </select>
 	    </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Imagem</label>
-                        <input type="file" name="img" required="">
+                        <input type="file" name="img" required="" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">

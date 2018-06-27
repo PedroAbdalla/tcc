@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Imagem</label>
-                        <input type="file" name="img">
+                        <input type="file" name="img" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">

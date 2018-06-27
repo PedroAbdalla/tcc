@@ -26,9 +26,4 @@ include_once('admin.php');
         </div>
     </div>
     <button type="submit" class="btn btn-default">Atualizar</button>
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Atualizar Senha</button>
 </form>
-
-<?php
-include_once('../view/publico/modal_senha.php');
-?>

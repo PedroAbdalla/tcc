@@ -1,3 +1,6 @@
+<?php 
+!empty($usuario->id) ? $id_usuario = $usuario->id : $id_usuario = 0;
+?>
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">

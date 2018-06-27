@@ -1,6 +1,10 @@
 ﻿body {
   font-family: Open Sans; 
 }
+.ui-widget.ui-widget-content {
+    max-height: 220px;
+    overflow-y: auto;
+}
 .btn-default{
     background: #4DC7A0;
     color: white;
@@ -164,10 +168,9 @@
     opacity: 0;
     transition: opacity 0.5s linear;
 }
-.prancha div{
-    display: inline-block;
-    width: 19%;
+.prancha div {
     padding: 5px 3px;
+    font-weight: bold;
 }
 .prancha .prancha-ajax {
     width: 100%;
@@ -220,6 +223,9 @@ h4, .logos{
     margin: 10px 20px;
 }
 /*-------------------restrito-------------------*/
+.admin-list li {
+    margin: 10px auto;
+}
 /*-------------------lista usuario-------------------*/
 .lista-usuario > tbody  > tr{
     cursor: pointer;

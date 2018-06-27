@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Imagem</label>
-                        <input type="file" name="img" required="">
+                        <input type="file" name="img" required="" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer">

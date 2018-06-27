@@ -9,8 +9,8 @@
     require_once('../dao/usuarioImagensDao.php');
     include_once('../lib/php/funcoes.php');
     $opcao = (int)$_REQUEST['opcao'];
-    empty($_SESSION['usuarioLogado']['id']) ? $id_tabela = 1 :  $id_tabela = $_SESSION['usuarioLogado']['id'];
 	session_start();
+    empty($_SESSION['usuarioLogado']['id']) ? $id_tabela = 1 :  $id_tabela = $_SESSION['usuarioLogado']['id'];
     if($opcao == 1){
         $usuarioCategoriaDao = new usuarioCategoriaDao();
         $categorias = $usuarioCategoriaDao->listarCategorias($id_tabela);
@@ -20,7 +20,8 @@
         unset($_SESSION['usuarioLogado']);
         $tabelaDao = new tabelaDao();
         $categoria = $tabelaDao->getCategoria();
-        $caminho = '../view/publico/index.php';
+        header("Location:../../tcc/index");
+        exit;
     }
     if($opcao == 3){
         $caminho = '../view/publico/talk.php';

@@ -26,7 +26,7 @@ class usuarioCategoriaDao{
 
     public function listarCategorias($id_usuario)
     {
-        $sql = $this->conn->prepare("SELECT * FROM tabela_usuario_categoria where id_usuario=:id_usuario");
+        $sql = $this->conn->prepare("SELECT * FROM tabela_usuario_categoria where id_usuario=:id_usuario order by categoria");
         $sql->bindValue(':id_usuario',$id_usuario);
         $sql->execute();
         $lista = array();

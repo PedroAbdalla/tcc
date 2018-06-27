@@ -5,7 +5,10 @@ $tabelaDao = new tabelaDao();
 ?>
 <ul class="list-inline prancha-ajax">
     <?php foreach ($lista as $l) { ?>
-        <li><img width="100" height="100" class="figura img-thumbnail" src="../../../tcc/imagens/<?= $us ?>/<?= $repositorio ?>/<?= $l->imagem ?>" data-text="<?php echo $l->fonetica ?>"></li>
+        <li>
+        	<img width="100" height="100" class="figura img-thumbnail" src="../../../tcc/imagens/<?= $us ?>/<?= $repositorio ?>/<?= $l->imagem ?>" data-text="<?php echo $l->fonetica ?>">
+        	<div class="text-center"><?= $l->fonetica ?></div>
+        </li>
     <?php } ?>
 </ul>
 <script type="text/javascript">

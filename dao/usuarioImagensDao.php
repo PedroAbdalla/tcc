@@ -13,7 +13,7 @@ class usuarioImagensDao{
     }
     public function listarImagens($id_categoria)
     {
-        $sql = $this->conn->prepare("SELECT * FROM tabela_usuario_imagens where id_categoria=:id_categoria");
+        $sql = $this->conn->prepare("SELECT * FROM tabela_usuario_imagens where id_categoria=:id_categoria ORDER BY fonetica");
         $sql->bindValue(':id_categoria',$id_categoria);
         $sql->execute();
         $lista = array();
