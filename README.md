@@ -1,11 +1,1 @@
-# tcc ajustes a serem feitos:
-- escolher fonte padrão
-- criar página login
-- criar menu das tabelas (menu-lateral)
-- criar index
-- ajustar bordas do talk
-- transferir css/sass (se for usar sass)
-- melhorar rodapé
-- criar fale conosco
-- ident páginas
-- criar função que verifica compatibilidade do navegador com Speech Synthesis API
+https://tccpedro.000webhostapp.com/tcc/index
